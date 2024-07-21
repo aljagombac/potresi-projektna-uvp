@@ -1,1 +1,1 @@
-# potresi-projektna-uvp
+# Analiza potresnih dejavnosti 
