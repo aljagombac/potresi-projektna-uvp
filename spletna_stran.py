@@ -1,14 +1,15 @@
 import requests
 import os
+import re
 
 # url potresov
-wiki_sez_potresov_url = "https://en.wikipedia.org/wiki/Lists_of_earthquakes"
+wiki_potres_url = "https://en.wikipedia.org/wiki/List_of_earthquakes_in_2024"
 # mapa, kjer je shranjena html datoteka
 potresi_mapa = "podatki" 
 # datoteka, kamor se shrani html stran
-wiki_potresi_html = "wiki_stran.html"
+wiki_potres_html = "wiki_stran.html"
 # ime datoteke, kjer je shranjen csv
-csv_dat_wiki = "wii_potresi.csv"
+csv_dat_wiki = "wiki_potresi.csv"
 
 def shrani_url_v_niz(url):
     """Vrne vsebino strani kot niz."""
@@ -34,7 +35,14 @@ def shrani_html(url, mapa, datoteka):
     text = shrani_url_v_niz(url)
     shrani_niz_v_datoteko(text, mapa, datoteka)
 
-shrani_html(wiki_sez_potresov_url, potresi_mapa, wiki_potresi_html)
+#shrani nize urlj-ev potresov za leta 2010-2024 v html datoteke
+for n in range(2010, 2025):
+    wiki_html = f"wiki_potres_{n}.html"
+    if n == 2024:
+      shrani_html(wiki_url, potresi_mapa, wiki_html)
+    else:    
+        wiki_url = wiki_potres_url.replace("2024", str(n))
+        shrani_html(wiki_url, potresi_mapa, wiki_html) 
 
 
 
